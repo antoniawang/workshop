@@ -14,3 +14,6 @@
 - Git is all about commit hashes
 - Branch names are just pointers/references to commit hashes
 - One commit hash could have multiple branch alias, but every commit must have a unique hash
+
+## Getting Started
+
