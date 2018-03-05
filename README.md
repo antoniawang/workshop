@@ -29,9 +29,10 @@
 - HEAD^^ or HEAD~2 - two commits before, aka the grandparent of, your current position*
 - Detached HEAD - your current position that is not the most recent commit
 
-- * HEAD^^ and HEAD~2 might not always point to the same commit. If you need to refer to a commit more than 2 generations before, it’s better to look up the unique commit hash.
+\* HEAD^^ and HEAD~2 might not always point to the same commit. If you need to refer to a commit more than 2 generations before, it’s better to look up the unique commit hash.
 
 ## SIGNING UP- Getting Started
+
 
 ### Cloning
 - Download from existing repo on GitHub
@@ -43,6 +44,11 @@
 ### Starting from Scratch (unlikely)
 - Create some files in your local folder
 + git init
+
+### Oops, I didn't mean to
+- I changed my mind. How to un-git?
++ rm -rf .git
+
 
 ## MULTIPLE PERSONAS - Branching
 - Show all you branches: git branch 
@@ -104,7 +110,7 @@ Each of your stashed changes gets added to a stack
 - That line is the equivalent of executing these 4 lines:
 1. git checkout master
 2. git pull origin master
-3, git checkout new_branch_name
+3. git checkout new_branch_name
 4. git rebase master
 -Ideally, you’ll see a bunch of “applying” messages and all ends well.
 
