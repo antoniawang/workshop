@@ -67,8 +67,7 @@
 4. git add <file1> <file2> OR git add . (Add all files - but make sure you know what you’re adding!)
 5. git commit -m “descriptive message”
 Alternatively, combine steps 4 and 5  (not advised): 
-	- git commit -am “I am reckless and added all tracked files
-	- and committed in one line”
+	- git commit -am “I am reckless and added all tracked files and committed in one line”
 6. Rinse and repeat
 
 ## PLAYING THE FIELD - Stashing
