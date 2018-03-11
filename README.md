@@ -36,7 +36,7 @@
 
 ### Cloning
 - Download from existing repo on GitHub
-+ `git clone <github_url>`
+- `git clone <github_url>`
 
 ### Forking and Cloning
 - Alternatively, fork a GitHub repo to your GitHub account, then clone to your local machine
