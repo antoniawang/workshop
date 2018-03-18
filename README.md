@@ -33,22 +33,18 @@
 
 ## SIGNING UP- Getting Started
 
-
-### Cloning
-- Download from existing repo on GitHub
-- `git clone <github_url>`
-
 ### Forking and Cloning
-- Alternatively, fork a GitHub repo to your GitHub account, then clone to your local machine
+- Log into your Github account.
+- Go to `https://github.com/antoniawang/workshop` and click the `Fork` button in the upper right. Follow the directions to Fork the workshop to you repo.
+- Migrate to the folder where you want to house this workshop’s repo files (this folder will be the parent directory). Follow the instuctions to clone: `git clone <YOUR-GITHUB-REPOS-URL>`,
+- `cd` into `git_workshop`.
+- Do a `git status` to make sure everything is where you want it.
+- If you messed up, you can do `rm -rf .git` to “un-git”
 
 ### Starting from Scratch (unlikely)
-- Create some files in your local folder
-+ git init
+- If you wanted, you can also start by creating some files in a local folder: `git init`
 
-### Oops, I didn't mean to
-- I changed my mind. How to un-git?
-+ rm -rf .git
-
+******************
 
 ## MULTIPLE PERSONAS - Branching
 - Show all you branches: git branch 
