@@ -31,12 +31,12 @@
 
 \* HEAD^^ and HEAD~2 might not always point to the same commit. If you need to refer to a commit more than 2 generations before, it’s better to look up the unique commit hash.
 
-## SIGNING UP- Getting Started
+## SIGNING UP - Getting Started
 
 ### Forking and Cloning
 - Log into your Github account.
 - Go to `https://github.com/antoniawang/workshop` and click the `Fork` button in the upper right. Follow the directions to Fork the workshop to you repo.
-- Migrate to the folder where you want to house this workshop’s repo files (this folder will be the parent directory). Follow the instuctions to clone: `git clone <YOUR-GITHUB-REPOS-URL>`,
+- Migrate to the folder where you want to house this workshop’s repo files (this folder will be the parent directory). Follow the instuctions to clone: `git clone <YOUR-GITHUB-REPOS-URL>`.
 - `cd` into `git_workshop`.
 - Do a `git status` to make sure everything is where you want it.
 - If you messed up, you can do `rm -rf .git` to “un-git”
@@ -44,7 +44,19 @@
 ### Starting from Scratch (unlikely)
 - If you wanted, you can also start by creating some files in a local folder: `git init`
 
-******************
+
+## THE DATING GAME - Adding and Committing
+### Basics
+- Create a file called `helloWorld.txt` and open it in your preferred text editor. Hint: useful commands are `touch` and `open`.
+- Write the line “Hello World!” and save the file.
+- Do `git status` and you should see a message about `helloWorld.txt` being an untracked file.
+- Let's track it: `git add helloWorld.txt`. Do another `git status` and you should see `helloWorld.txt` is staged for commit.
+- Now commit your changes and use the `-m` option to add a message: `git commit -m “created helloWorld”`
+
+**********************************************************
+
+
+
 
 ## MULTIPLE PERSONAS - Branching
 - Show all you branches: git branch 
@@ -56,15 +68,7 @@
 - Delete the local copy of your branch: 
 - git branch -D <name_of_branch>
 
-## THE DATING GAME - Adding and Committing
-1. Check current status of your current branch: git status
-2. Make changes and/or create new files
-3. git status (Be safe and check again)
-4. git add <file1> <file2> OR git add . (Add all files - but make sure you know what you’re adding!)
-5. git commit -m “descriptive message”
-Alternatively, combine steps 4 and 5  (not advised): 
-	- git commit -am “I am reckless and added all tracked files and committed in one line”
-6. Rinse and repeat
+
 
 ## PLAYING THE FIELD - Stashing
 You want to mess around without any commitments? Stash it!
