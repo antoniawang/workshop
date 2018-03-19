@@ -46,12 +46,49 @@
 
 
 ## THE DATING GAME - Adding and Committing
+
 ### Basics
 - Create a file called `helloWorld.txt` and open it in your preferred text editor. Hint: useful commands are `touch` and `open`.
 - Write the line “Hello World!” and save the file.
 - Do `git status` and you should see a message about `helloWorld.txt` being an untracked file.
 - Let's track it: `git add helloWorld.txt`. Do another `git status` and you should see `helloWorld.txt` is staged for commit.
-- Now commit your changes and use the `-m` option to add a message: `git commit -m “created helloWorld”`
+- Now commit your changes and use the `-m` option to add a message: `git commit -m “created helloWorld”`. PRO TIP: ALWAYS have a commit message or your future self or another person working with you will hate current you. Commit messages should describe the changes you made and, when applicable, include the JIRA ticket number.
+- Push your changes to the remote (Github): `git push`.
+
+### Ignoring the Signs
+- Generally, you don’t want to track/version certain types of files: binary files (images, audio, videos, etc), databases, and passwords or keys. So put these in the `.gitignore.` file.
+- Go to `https://confluence.creditkarma.com/display/QE/Quality+Engineering` and download the House QE bug sigel into your repo folder.
+- Do a `git status`. It says no changes! Why? Let's look at our `.gitignore` file.
+- Open `.gitignore` and you can see that we're ignoring (not going to track) all `.png` and `.jpeg` files. Now comment out the line first line: `# *.png`. Save and exit.
+- Now do `git status` again. See what’s changed? We are now tracking House QE sigel image. Do a `git diff` and try to understand the gibberish.
+- Since we don't actually want to track an image file, do `git checkout .gitignore` to revert that comment change (we’ll go over how to revert file changes and commits in a bit). 
+- Notice that your `.gitignore` file is back to it was in the beginning.
+- Add the line `new_lyrics/` to your `.gitignore` file. More on that later. Add and commit.
+- On your own, you can try to track an image, make a change to the image (crop or annotate it), and see if you can understand the `git diff` report.
+
+### Moving Fast
+- In `helloWorld.txt`, add a line “I am going to change up some lyrics.”
+- Open `bells.txt` and `new_lyrics/smells.txt`. Replace the first line of `bells.txt` with the first line of `smells.txt`. Note that we will not actually changing any of the files in the `new_lyrics` folder (hence why we put that line earlier in `.gitignore`). They are just there so you can have the new lyric handy.
+- Git add and commit.
+- Replace second line in `bells.txt` with the second line from `smells.txt`.
+- Open `history.txt` and `new_lyrics/tree.txt`. Replace the first line of `history.txt` with the first line of `tree.txt`.
+- Add all files at once with `git add .` and commit. See how it added both files.
+- In `helloWorld.txt`, add a line “I love The Simpsons.”
+- Replace all the remaining lines in `bells.txt` with the remaining lines from `smells.txt`.
+- Replace all the remaining lines in `history.txt` with the remaining lines from `tree.txt`.
+- Do a `git status` and `git diff` just to check what's happening.
+- Add all files and commit in one step: `git commit -am “I am reckless and added all tracked files and committed in one line.”` Don’t do this unless you’re very sure about what you’re doing. Also, that is a very bad commit message.
+
+### Playing the field 
+- In `helloWorld.txt`, add a line “I don’t like The Simpsons.”
+- Actually, that’s a lie! Do NOT commit that: do `git stash`.
+- In `helloWorld.txt`, add a line “Let’s employ a nanny!”
+- Can’t afford it: stash again.
+- The stash is just a stack. You can take a look at what’s at the top of the stack (the latest change you stashed away_: `git stash peek`.
+- Actually, we are going get a nanny: `git stash pop` to place the last change back. 
+- Now observed `helloWorld.txt`. That last line is now back, and it’s out of the stash stack (do a `git stash peek`).
+- Add and commit.
+
 
 **********************************************************
 
