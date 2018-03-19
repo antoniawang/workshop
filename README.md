@@ -63,7 +63,7 @@
 - Now do `git status` again. See what’s changed? We are now tracking House QE sigel image. Do a `git diff` and try to understand the gibberish.
 - Since we don't actually want to track an image file, do `git checkout .gitignore` to revert that comment change (we’ll go over how to revert file changes and commits in a bit). 
 - Notice that your `.gitignore` file is back to it was in the beginning.
-- Add the line `new_lyrics/` to your `.gitignore` file. More on that later. Add and commit.
+- Add the line `new_lyrics/` to your `.gitignore` file. I'll explain in the next section. Add and commit.
 - On your own, you can try to track an image, make a change to the image (crop or annotate it), and see if you can understand the `git diff` report.
 
 ### Moving Fast
@@ -88,6 +88,28 @@
 - Actually, we are going get a nanny: `git stash pop` to place the last change back. 
 - Now observed `helloWorld.txt`. That last line is now back, and it’s out of the stash stack (do a `git stash peek`).
 - Add and commit.
+
+## MULTIPLE PERSONAS - Branching
+- Create a new branch: `git branch nanny` (since you’re on master, this will branch off `master` HEAD).
+- Go to the new branch: `git checkout nanny`.
+- In helloWorld, add a line “My nanny was named Mary Poppins.” DO NOT COMMIT!!
+- Do a `git status` ; `git diff`.
+- Create and switch to a new branch in one command: `git checkout -b bobbins.` This actually branches off of master because you did not commit your changes on branch `nanny`.
+- Do a `git status` ; `git diff`. Note that the diff is the same! This is because we haven’t committed yet.
+- In `helloWorld.txt`, add a line “My nanny was named Shary Bobbins.” Add and commit.
+- Create and checkout a new branch, `temporary` (off of `bobbins`).
+- Try to delete `temporary` branch: `git branch -D temporary`. OOPS, you got an error! You can’t delete a branch you’re currently on, duh.
+- Checkout branch `nanny`, and delete branch `temporary`. 
+- Now add and commit `nanny`.
+- Let’s also modify the first line of `sugar.txt` by capitalizing every word. Add and commit.
+- Push your branch to the remote: `git push -u origin nanny`. PRO TIP: name the remote the same thing as your local. It makes thing easier.
+- Checkout `bobbins`, open `sugar.txt` and `new_lyrics/corner.txt`. (Notice that `sugar.txt` does not have the changes you made on branch `nanny`.) Replace the first stanza of `sugar.txt` with the first line of `corner.txt`.
+- Push your branch to the remote: `git push -u origin bobbins` (name it the same thing).
+- Let’s create two more branches that we’ll use later: Checkout `master` and create and checkout a branch named `american`. Add and commit.
+- Modify the first stanza of `sugar.txt` with whatever you like.
+- Now checkout `nanny` and create and checkout a new branch,  `half`. 
+- Modify the fourth stanza of `sugar.txt`. Add and commit.
+
 
 
 **********************************************************
