@@ -52,31 +52,31 @@
 - Write the line “Hello World!” and save the file.
 - Do `git status` and you should see a message about `helloWorld.txt` being an untracked file.
 - Let's track it: `git add helloWorld.txt`. Do another `git status` and you should see `helloWorld.txt` is staged for commit.
-- Now commit your changes and use the `-m` option to add a message: `git commit -m “created helloWorld”`. PRO TIP: ALWAYS have a commit message or your future self or another person working with you will hate current you. Commit messages should describe the changes you made and, when applicable, include the JIRA ticket number.
+- Now commit your changes and use the `-m` option to add a message: `git commit -m “created helloWorld”`. PRO TIP: ALWAYS have a USEFUL commit message, so your future self or another person working with you won't hate current you. Commit messages should describe the changes you made and, when applicable, include the JIRA ticket number.
 - Push your changes to the remote (Github): `git push`.
 
 ### Ignoring the Signs
 - Generally, you don’t want to track/version certain types of files: binary files (images, audio, videos, etc), databases, and passwords or keys. So put these in the `.gitignore.` file.
 - Go to `https://confluence.creditkarma.com/display/QE/Quality+Engineering` and download the House QE bug sigel into your repo folder.
 - Do a `git status`. It says no changes! Why? Let's look at our `.gitignore` file.
-- Open `.gitignore` and you can see that we're ignoring (not going to track) all `.png` and `.jpeg` files. Now comment out the line first line: `# *.png`. Save and exit.
-- Now do `git status` again. See what’s changed? We are now tracking House QE sigel image. Do a `git diff` and try to understand the gibberish.
+- Open `.gitignore` and you can see that we're ignoring (not going to track) all `.png` and `.jpg` files. Now comment out the line first line: `# *.png`. Save and exit.
+- Now do `git status` again. See what’s changed? Git is asking if we want to track the House QE sigel image.
 - Since we don't actually want to track an image file, do `git checkout .gitignore` to revert that comment change (we’ll go over how to revert file changes and commits in a bit). 
 - Notice that your `.gitignore` file is back to it was in the beginning.
-- Add the line `new_lyrics/` to your `.gitignore` file. I'll explain in the next section. Add and commit.
-- On your own, you can try to track an image, make a change to the image (crop or annotate it), and see if you can understand the `git diff` report.
+- Add the line `new_lyrics/` to your `.gitignore` file. Add and commit. Note: This prevents Git from tracking any new changes to files in that folder. We are not going to make any changes to the lyrics in that folder; they are there so you can easily copy and paste over new lyrics.
+- On your own, you can download and track an image, make a change to the image (crop or annotate it), and see if you can understand the `git diff` report.
 
 ### Moving Fast
 - In `helloWorld.txt`, add a line “I am going to change up some lyrics.”
-- Open `bells.txt` and `new_lyrics/smells.txt`. Replace the first line of `bells.txt` with the first line of `smells.txt`. Note that we will not actually changing any of the files in the `new_lyrics` folder (hence why we put that line earlier in `.gitignore`). They are just there so you can have the new lyric handy.
-- Git add and commit.
+- Open `bells.txt` and `new_lyrics/smells.txt`. Replace the first line of `bells.txt` with the first line of `smells.txt`.
+- Add ahd commit your changes: `git add helloWorld.txt bells.txt`; `git commit -m "replaced first line of bells.txt"`.
 - Replace second line in `bells.txt` with the second line from `smells.txt`.
 - Open `history.txt` and `new_lyrics/tree.txt`. Replace the first line of `history.txt` with the first line of `tree.txt`.
-- Add all files at once with `git add .` and commit. See how it added both files.
+- Add all files at once with `git add .`. Use `git status` to see you've added both files. Commit.
 - In `helloWorld.txt`, add a line “I love The Simpsons.”
 - Replace all the remaining lines in `bells.txt` with the remaining lines from `smells.txt`.
 - Replace all the remaining lines in `history.txt` with the remaining lines from `tree.txt`.
-- Do a `git status` and `git diff` just to check what's happening.
+- Do a `git status` and `git diff` just to check what's happening. PRO TIP: Use `git diff <fileNAME>` will show you the differences for an individual file.
 - Add all files and commit in one step: `git commit -am “I am reckless and added all tracked files and committed in one line.”` Don’t do this unless you’re very sure about what you’re doing. Also, that is a very bad commit message.
 
 ### Playing the field 
@@ -84,37 +84,39 @@
 - Actually, that’s a lie! Do NOT commit that: do `git stash`.
 - In `helloWorld.txt`, add a line “Let’s employ a nanny!”
 - Can’t afford it: stash again.
-- The stash is just a stack. You can take a look at what’s at the top of the stack (the latest change you stashed away_: `git stash peek`.
+- The stash is just a stack. You can take a peek at what’s at the top of the stack (the latest files you stashed away): `git stash show`.
 - Actually, we are going get a nanny: `git stash pop` to place the last change back. 
-- Now observed `helloWorld.txt`. That last line is now back, and it’s out of the stash stack (do a `git stash peek`).
+- Now observe `helloWorld.txt`. That last line is now back, and it’s out of the stash stack.
 - Add and commit.
+- Now lets send all our changes to the remote: `git push origin master`.
 
 ## MULTIPLE PERSONAS - Branching
 - Create a new branch: `git branch nanny` (since you’re on master, this will branch off `master` HEAD).
 - Go to the new branch: `git checkout nanny`.
-- In helloWorld, add a line “My nanny was named Mary Poppins.” DO NOT COMMIT!!
+- In helloWorld, add a line “My nanny was named Mary Poppins.” Add and commit.
 - Do a `git status` ; `git diff`.
-- Create and switch to a new branch in one command: `git checkout -b bobbins.` This actually branches off of master because you did not commit your changes on branch `nanny`.
-- Do a `git status` ; `git diff`. Note that the diff is the same! This is because we haven’t committed yet.
+- Open `helloWorld.txt' again and change that last line to "My nanny was named Shary Bobbins". Do NOT commit!
+- Switch to branch `master`. Oh no! You got an error asking you to stash or commit changes before switching branches. We will do neither! We can use `git checkout to throw away our changes: `git checkout -- helloWorld.txt`. This option throws uncommitted changes you've made to a given file/path.
+- Now switch to branch `master` again. Success!
+- Create and switch to a new branch in one command: `git checkout -b bobbins.`
 - In `helloWorld.txt`, add a line “My nanny was named Shary Bobbins.” Add and commit.
 - Create and checkout a new branch, `temporary` (off of `bobbins`).
 - Try to delete `temporary` branch: `git branch -D temporary`. OOPS, you got an error! You can’t delete a branch you’re currently on, duh.
-- Checkout branch `nanny`, and delete branch `temporary`. 
-- Now add and commit `nanny`.
+- Checkout branch `nanny`, and delete branch `temporary`.
 - Let’s also modify the first line of `sugar.txt` by capitalizing every word. Add and commit.
 - Push your branch to the remote: `git push -u origin nanny`. PRO TIP: name the remote the same thing as your local. It makes thing easier.
-- Checkout `bobbins`, open `sugar.txt` and `new_lyrics/corner.txt`. (Notice that `sugar.txt` does not have the changes you made on branch `nanny`.) Replace the first stanza of `sugar.txt` with the first line of `corner.txt`.
+- Checkout `bobbins`, open `sugar.txt` and `new_lyrics/corner.txt`. (Notice that `sugar.txt` does not have the changes you made on branch `nanny`.) Replace the first stanza of `sugar.txt` with the first stanza of `corner.txt`.
 - Push your branch to the remote: `git push -u origin bobbins` (name it the same thing).
 - Let’s create two more branches that we’ll use later: Checkout `master` and create and checkout a branch named `american`. Add and commit.
 - Modify the first stanza of `sugar.txt` with whatever you like.
 - Now checkout `nanny` and create and checkout a new branch,  `half`. 
-- Modify the fourth stanza of `sugar.txt`. Add and commit.
+- Modify the fourth stanza of `sugar.txt` by reversing the order of the last two lines. Add and commit.
 
 
 ## GETTING SERIOUS - Merging
 - Go back to branch `master`.
 - Before we do anything, we should ensure we have the latest `master`: `git pull origin master`. This pulls the latest version of the branch master from the remote and updates your local copy.
-- Merge in `nanny`: `git merge --no-ff nanny`. Complete the merge by following the instructions on the screen.
+- Merge in `nanny`: `git merge nanny`. If you get a merge conflict, do `git diff` and see if you have extra whitespace at the end of your `helloWorld.txt`. If you need to fix this, do `git merge --abort`, then fix the whitespace and try again. Complete the merge by following the instructions on the screen. It will be a file in vim, which you will need to save by typing in `:wq`.
 - Make a descriptive commit message indicating this was a merge. Your future self will thank you.
 - Now push your updated copy of master to the remote: `git push origin master`.
 - PRO TIP: It’s good practice to not keep around stale branches:`git branch -D nanny`.
@@ -122,17 +124,55 @@
 
 ## WE NEED COUNSELING - Conflict Resolution
 ### Merge Tool
-- Show the diff of a file under conflict: `git diff sugar.txt`. 
-- Git status to see what conflicted and git diff to see actual conflicts
-- Use `git mergetool` to resolve conflicts
-- Then complete the merge: `git commit`; `git merge bobbins`; `git push origin master`.
+- Do a `git status` to show the files which are conflicted.
+- Show the diff of all files under conflict: `git diff`. 
+- Use `git mergetool` to resolve conflicts. We are assuming we're all using the default `OpenDiff` tool.
+- For files, select "choose right" in the dropdown. Save and quit the `OpenDiff` program.
+- Then complete the merge (follow instructions on screen): `git commit`; save the commit message that appears in vim; `git push origin master`.
 
 
 ### Rebasing
 - Remember we had those other two branches? Well now they’re super out of date. We should make sure they’re not as stale: `git checkout half`; 
 `git rebase master`,
 - Rebasing replays all the commits on the branch onto another branch, e.g. in this case you replay all the commits from half onto the new master. You can rebase any branch onto any other branch, as you like.
-- `git push origin half`. 
+- Did you conflict? No, lucky ducky. If yes, follow these steps for manual conflict resolution.
+- `git diff sugar.txt` to see the difference. Notice the lines which indicate where you have a conflict. Now open the file in an editor. Keep the line you want and delete all the git messages surrounding it. Save and quit.
+- `git add sugar.txt` to indicate the conflict was resolved.
+- git rebase --continue` to continue.
+- We've successfully rebased. But what if this is just not working?
+
+## THE BLAME GAME - Finding a scapegoat
+- To get the history of your current branch: `git log`.
+- To see the logs in an text format showing relations of branches, commits and merge points: `git log --graph`.
+- Show the history for a particular file: `git log <someFILE>`.
+- To show who made the last commit for each line of code: `git blame <someFILE>.`
+
+## BREAKING UP IS (NOT) HARD TO DO - When It's Over.
+### It's not you; it's me.
+- In `helloWorld.txt`, add a line "Shary Bobbins will return." Add the file.
+- Wait, she actually died at the end of the episode. We need to "un-add" that file: `git reset`.
+- What if you want to reverse some commit from long ago? First, find the commit you want to reverse: `git log`. Find the commit where you wrote "My nanny was named Shary Bobbins." Copy that commit hash to clip board. Do `git revert <commitHASH>`. PRO TIP: This is why you need good commit messages. Also, the further back you go to revert, the riskier this becomes.
+- Actually, we want that line back in. Rather than typing it again, we can revert that the previous revert: `git revert HEAD`.
+- Sometimes, your local becomes out of date that you want to blow away all local changes (This happens a lot with CKVM). Do `git log` and you'll notice the last two commits were the "reverts." This is not useful, so let's get rid of them. `git reset --hard HEAD~2` or `git reset --hard <thatCOMMIT>`.
+
+### Actually, it's you.
+- Now we have this branch which was rebased onto the new `master`. Let's push it to the remote for posterity: `git push origin half`.
+- Oh no! You've been rejected. Why? Because you have 1 commit each on your local and remote branches, and they're not the same.
+- What to do? Option 1: `git pull origin half` to pull down the remote change and try to push again. This may work or it may conflict. It's the safe option.
+- But we live on the edge, so we'll do option 2, blow away your remote changes with your local changes: `git push -uf origin half.` PRO TIP: BE VERY SURE YOU KNOW WHAT YOU'RE DOING HERE. THERE'S NO GOING BACK.
+
+
+
+
+
+
+
+
+
+
+
+- Now push to the remote: `git push origin half`. Oh no, another conflict!
+
 - But you need to be careful when rebasing: `git checkout american`.
 - What will happen when we try to rebase on master? Conflict!
 - Resolve it and then push the new branch
