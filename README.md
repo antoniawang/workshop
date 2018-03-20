@@ -111,47 +111,41 @@
 - Modify the fourth stanza of `sugar.txt`. Add and commit.
 
 
+## GETTING SERIOUS - Merging
+- Go back to branch `master`.
+- Before we do anything, we should ensure we have the latest `master`: `git pull origin master`. This pulls the latest version of the branch master from the remote and updates your local copy.
+- Merge in `nanny`: `git merge --no-ff nanny`. Complete the merge by following the instructions on the screen.
+- Make a descriptive commit message indicating this was a merge. Your future self will thank you.
+- Now push your updated copy of master to the remote: `git push origin master`.
+- PRO TIP: It’s good practice to not keep around stale branches:`git branch -D nanny`.
+- Now let’s do it again, merging in `bobbins`. What do you think will happen? Conflict! Let’s talk resolution!
+
+## WE NEED COUNSELING - Conflict Resolution
+### Merge Tool
+- Show the diff of a file under conflict: `git diff sugar.txt`. 
+- Git status to see what conflicted and git diff to see actual conflicts
+- Use `git mergetool` to resolve conflicts
+- Then complete the merge: `git commit`; `git merge bobbins`; `git push origin master`.
+
+
+### Rebasing
+- Remember we had those other two branches? Well now they’re super out of date. We should make sure they’re not as stale: `git checkout half`; 
+`git rebase master`,
+- Rebasing replays all the commits on the branch onto another branch, e.g. in this case you replay all the commits from half onto the new master. You can rebase any branch onto any other branch, as you like.
+- `git push origin half`. 
+- But you need to be careful when rebasing: `git checkout american`.
+- What will happen when we try to rebase on master? Conflict!
+- Resolve it and then push the new branch
+
+
+## FAMILY TREE -  Reviewing How We Got Here
+- Once we’ve done all the merges, let’s look at how the tree looks. Use the following commands
+- `git log` to show all previous commits
+- `git log --graph` to show an ASCII graph of your git history
+- 1git log --first-parent1 to show only the merges
+- `git log <SOME_BRANCH>` to show git log as if you were on somebranch
 
 **********************************************************
-
-
-
-
-## MULTIPLE PERSONAS - Branching
-- Show all you branches: git branch 
-- Create a new branch: git branch <new_branch_name>
-- Switch to a branch: git checkout <branch_name>
-- Creates new branch and switch to that branch: 
-- git checkout -b <new_branch_name> 
-- List all the remote branches: git branch -r 
-- Delete the local copy of your branch: 
-- git branch -D <name_of_branch>
-
-
-
-## PLAYING THE FIELD - Stashing
-You want to mess around without any commitments? Stash it!
-1. Make a change
-2. Test it out
-3. It sucks, but I want keep it on the side? git stash
-Each of your stashed changes gets added to a stack
-- To retrieve your most recent stashed change: git stash pop (repeat until your stack is empty)
-- To see what is at the top of your stack: git stash show
-
-## GETTING SERIOUS AND SETTLING DOWN - Making It Permenant
-
-### Sending Your Branch to the Remote
-- Push your branch to the remote: git push -u origin <new_remote_name> 
-- This creates remote upstream of your local branch
-- Usually, your new remote name should be the same as your local branch name
-
-### Merging
-1. Always test changes before you merge - a Continuous Integration (CI) system
-2. Go back to your master branch: git checkout master
-3. Update your local master to the remote Top of the Tree:git pull origin master 
-4. Has master changed? - if yes, you’ll need to rebase
-5. Otherwise, merge and see on which commit the merge occurred: git merge --no-ff <new_branch_name>
-6. Complete merge by following instructions on the screen
 
 ## COUNSELING AND CONFLICTS - Fixing the Kinks
 
